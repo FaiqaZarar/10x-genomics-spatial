@@ -1,4 +1,4 @@
-# 🧬 Spatial Transcriptomics Analysis — 10x Genomics Visium & Xenium
+# Spatial Transcriptomics Analysis — 10x Genomics Visium & Xenium
 
 [![Platform](https://img.shields.io/badge/Platform-Google%20Colab-F9AB00?style=flat-square)](https://colab.research.google.com)
 [![Language](https://img.shields.io/badge/Language-Python%203.9-3776AB?style=flat-square)](https://www.python.org)
@@ -13,7 +13,7 @@
 
 ---
 
-## 📖 Overview
+## Overview
 
 Spatial transcriptomics technologies allow gene expression to be measured **while preserving the physical location** of each measurement in the tissue. This repository contains four fully documented analysis notebooks covering two major 10x Genomics spatial platforms — **Visium** and **Xenium** — using the **Scanpy** and **Squidpy** ecosystems.
 
@@ -24,12 +24,12 @@ Each notebook contains detailed markdown explanations before every code block, c
 
 ---
 
-## 🔬 Technology Overview
+## Technology Overview
 
 | Platform | Resolution | Method | Output |
 |---|---|---|---|
-| **Visium** | ~55µm spots (multiple cells per spot) | Captures RNA from arrayed spots on a glass slide | Spot × gene matrix |
-| **Xenium** | Single-cell resolution | In-situ RNA detection directly inside cells in tissue | Cell × gene matrix |
+| **Visium** | ~55µm spots (multiple cells per spot) | Captures RNA from arrayed spots on a glass slide | Spot x gene matrix |
+| **Xenium** | Single-cell resolution | In-situ RNA detection directly inside cells in tissue | Cell x gene matrix |
 
 ### Key Concept: AnnData
 
@@ -46,7 +46,7 @@ AnnData object
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 10x-genomics-spatial/
@@ -91,7 +91,7 @@ AnnData object
 
 ---
 
-## 📓 Notebooks
+## Notebooks
 
 ### Notebook 1 — Basic Scanpy Spatial Analysis
 
@@ -173,7 +173,7 @@ Raw Visium Data
 **Dataset:** Mouse Brain — Visium with fluorescence image (pre-annotated)  
 **Tools:** Scanpy, Squidpy, Pandas, AnnData
 
-This notebook demonstrates **image feature extraction** from fluorescence Visium data. The fluorescence image has three channels: DAPI (nuclei), anti-NEUN (neurons), and anti-GFAP (glial cells). We segment nuclei using watershed, extract image features, and compare them to gene expression clusters.
+This notebook demonstrates image feature extraction from fluorescence Visium data. The fluorescence image has three channels: DAPI (nuclei), anti-NEUN (neurons), and anti-GFAP (glial cells). We segment nuclei using the watershed algorithm, extract image features, and compare them to gene expression clusters.
 
 #### Fluorescence Channels
 
@@ -220,7 +220,7 @@ Fluorescence Visium Data
 | Spatial Clusters (Gene-based) | Segmentation Comparison |
 |:---:|:---:|
 | ![Clusters](02_squidpy_visium_fluo/results/spatial_clusters.jpeg) | ![Segmentation](02_squidpy_visium_fluo/results/segmentation_comparison.jpeg) |
-| *Pre-annotated brain region clusters in tissue space* | *Left: Raw DAPI — Right: Watershed segmentation mask* |
+| *Pre-annotated brain region clusters in tissue space* | *Left: Raw DAPI channel — Right: Watershed segmentation mask* |
 
 | Image Features vs Gene Clusters |
 |:---:|
@@ -236,7 +236,7 @@ Fluorescence Visium Data
 **Dataset:** Mouse Brain — Visium with H&E image (pre-annotated)  
 **Tools:** Scanpy, Squidpy, NumPy, Pandas
 
-This notebook focuses on **spatial graph statistics** — building a neighborhood graph and computing statistical measures of spatial organization across brain regions.
+This notebook focuses on spatial graph statistics — building a neighborhood graph and computing statistical measures of spatial organization across brain regions.
 
 #### Spatial Statistics Explained
 
@@ -296,7 +296,7 @@ Pre-annotated Mouse Brain H&E Visium
 | ![Co-occurrence](03_squidpy_visium_hne/results/co_occurrence_hippocampus.jpeg) |
 | *Co-occurrence probability of each cluster at increasing distances from the Hippocampus* |
 
-> **Key Finding:** The Hippocampus shows high neighborhood enrichment with *Pyramidal_layer* and *Pyramidal_layer_dentate_gyrus* — these sub-regions are anatomically embedded within it. The co-occurrence plot confirms short-distance co-occurrence consistent with their known anatomy.
+> **Key Finding:** The Hippocampus shows high neighborhood enrichment with Pyramidal_layer and Pyramidal_layer_dentate_gyrus clusters. The co-occurrence plot confirms short-distance co-occurrence consistent with their known anatomy in the mouse brain.
 
 ---
 
@@ -305,7 +305,7 @@ Pre-annotated Mouse Brain H&E Visium
 **Dataset:** Single-cell spatial dataset (Squidpy built-in)  
 **Tools:** Scanpy, Squidpy, Seaborn, Matplotlib
 
-This notebook demonstrates **single-cell resolution** spatial analysis. Unlike Visium, every row here is one individually segmented cell with its exact spatial coordinates. We compute spatial statistics at true cellular resolution.
+This notebook demonstrates single-cell resolution spatial analysis. Unlike Visium where each spot contains multiple cells, every row here is one individually segmented cell with its exact spatial coordinates. We compute spatial statistics at true cellular resolution.
 
 #### Visium vs Single-Cell Resolution
 
@@ -313,10 +313,10 @@ This notebook demonstrates **single-cell resolution** spatial analysis. Unlike V
 VISIUM                          SINGLE-CELL SPATIAL (Xenium-style)
 ─────────────────────           ──────────────────────────────────
 Each dot = one SPOT             Each dot = one CELL
-  (~55µm, 5-30 cells)             (individually segmented)
+  (~55um, 5-30 cells)             (individually segmented)
 
-[●] [●] [●] [●]       vs       [· · · · · · · · · ·]
-[●] [●] [●] [●]                [· · · · · · · · · ·]
+[o] [o] [o] [o]       vs       [. . . . . . . . . .]
+[o] [o] [o] [o]                [. . . . . . . . . .]
 Coarser resolution              True single-cell resolution
 ```
 
@@ -337,7 +337,7 @@ Single-Cell Spatial Data
 ┌──────────────────────────┐
 │  Load Data               │  sq.datasets.imc()
 │  Calculate QC            │  sc.pp.calculate_qc_metrics()
-│  Filter Cells & Genes    │  min_counts=10, min_cells=5
+│  Filter Cells and Genes  │  min_counts=10, min_cells=5
 └───────────┬──────────────┘
             │
             ▼
@@ -351,8 +351,8 @@ Single-Cell Spatial Data
             ▼
 ┌──────────────────────────┐
 │  Spatial Graph           │  sq.gr.spatial_neighbors()
-│  (Delaunay triangulation │  coord_type="generic"
-│   for irregular coords)  │  delaunay=True
+│  Delaunay triangulation  │  coord_type="generic"
+│  for irregular coords    │  delaunay=True
 └───────────┬──────────────┘
             │
             ▼
@@ -386,11 +386,11 @@ Single-Cell Spatial Data
 | ![SVG](04_squidpy_xenium/results/spatially_variable_genes.jpeg) |
 | *Top Moran's I genes showing spatially organized expression patterns in tissue* |
 
-> **Key Finding:** Centrality scores reveal heterogeneous spatial roles of different cell clusters — some occupy the tissue core while others are peripheral. Top Moran's I genes show clear spatial organization, confirming that gene expression reflects underlying tissue architecture.
+> **Key Finding:** Centrality scores reveal heterogeneous spatial roles of different cell clusters. Top Moran's I genes show clear spatial organization, confirming that gene expression reflects underlying tissue architecture.
 
 ---
 
-## 🛠️ Installation & Dependencies
+## Installation and Dependencies
 
 ### Notebooks 1, 2, 3
 ```bash
@@ -404,22 +404,22 @@ pip install scanpy squidpy igraph leidenalg seaborn
 
 ---
 
-## 🚀 Running the Notebooks
+## Running the Notebooks
 
-All notebooks were developed and tested on **Google Colab** (free tier).
+All notebooks were developed and tested on Google Colab (free tier).
 
 ```
 1. Go to https://colab.research.google.com
 2. File → Upload notebook → select .ipynb file
-3. Add pip install cell at the top (see above)
+3. Add pip install cell at the top
 4. Runtime → Run all  (Ctrl + F9)
 ```
 
-> ⚠️ Some cells take several minutes (data download, UMAP, co-occurrence). This is expected behavior.
+Note: Some cells take several minutes to run (data download, UMAP computation, co-occurrence analysis). This is expected.
 
 ---
 
-## 📚 Citations
+## Citations
 
 1. Wolf et al. (2018) SCANPY: large-scale single-cell gene expression data analysis. *Genome Biology*. https://doi.org/10.1186/s13059-017-1382-0
 
@@ -433,7 +433,7 @@ All notebooks were developed and tested on **Google Colab** (free tier).
 
 ---
 
-## 🔗 Tutorial References
+## Tutorial References
 
 - [Scanpy Spatial Tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/spatial/basic-analysis.html)
 - [Squidpy Visium Fluorescence Tutorial](https://squidpy.readthedocs.io/en/stable/notebooks/tutorials/tutorial_visium_fluo.html)
