@@ -1,3 +1,10 @@
+> ##  View Notebooks Here
+> **GitHub cannot render `.ipynb` files in this repository.**
+> Please access all four notebooks via Google Drive:
+> ### 🔗 [Click here to open notebooks on Google Drive](https://drive.google.com/drive/folders/1rmNBxCTM0v1aFU56qrC-bLbIt9xyCx2l?usp=drive_link)
+
+---
+
 # Spatial Transcriptomics Analysis — 10x Genomics Visium & Xenium
 
 [![Platform](https://img.shields.io/badge/Platform-Google%20Colab-F9AB00?style=flat-square)](https://colab.research.google.com)
@@ -408,9 +415,11 @@ pip install scanpy squidpy igraph leidenalg seaborn
 
 All notebooks were developed and tested on Google Colab (free tier).
 
+> 🔗 **Notebooks are available on Google Drive:** [Open here](https://drive.google.com/drive/folders/1rmNBxCTM0v1aFU56qrC-bLbIt9xyCx2l?usp=drive_link)
+
 ```
-1. Go to https://colab.research.google.com
-2. File → Upload notebook → select .ipynb file
+1. Click the Google Drive link above
+2. Open any notebook → File → Open in Colab
 3. Add pip install cell at the top
 4. Runtime → Run all  (Ctrl + F9)
 ```
